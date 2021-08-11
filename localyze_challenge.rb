@@ -1,9 +1,13 @@
 # challenge 1 solution
 def get_max_char(str)
-  # get all sequences of characters
+  # get all sequences of characters by splitting each chunk using adjacent characters
   split_by_occurrence = str.each_char.chunk_while { |curr, nxt| curr == nxt }.map(&:join)
-  # get sort array by length and get last largest sequence if characters
-  split_by_occurrence.map(&:length).uniq == [1] ? split_by_occurrence[0] : split_by_occurrence.sort_by(&:length).last
+
+  # get length of max occurred character
+  max_length = split_by_occurrence.map(&:length).max
+
+  # return first element from array where sequence length matches max length
+  split_by_occurrence.select{|a| a.length == max_length}.first
 end
 
 # Challenge 3 solution
